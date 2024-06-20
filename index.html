@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lettre Surprise</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: url('IMG_6544 2024-06-20 13_35_49.JPG') no-repeat center center;
+            background-size: contain; /* Utilisation de 'contain' pour s'assurer que l'image est complètement visible sans être déformée */
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+            position: relative;
+        }
+        .message-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            width: 80%;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: none;
+        }
+        .envelope {
+            position: absolute;
+            width: 300px;
+            height: 200px;
+            background-color: #FFF;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .envelope:before, .envelope:after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 50%;
+            background-color: #FFF;
+            transition: transform 0.5s ease-in-out;
+        }
+        .envelope:before {
+            top: 0;
+            transform-origin: bottom;
+        }
+        .envelope:after {
+            bottom: 0;
+            transform-origin: top;
+        }
+        .envelope.open:before {
+            transform: rotateX(180deg);
+        }
+        .envelope.open:after {
+            transform: rotateX(-180deg);
+        }
+        .hearts {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+        .heart {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: red;
+            transform: rotate(45deg);
+            animation: float 5s infinite ease-in-out;
+        }
+        .heart::before,
+        .heart::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: red;
+            border-radius: 50%;
+        }
+        .heart::before {
+            top: -10px;
+            left: 0;
+        }
+        .heart::after {
+            left: -10px;
+            top: 0;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(45deg); opacity: 1; }
+            50% { transform: translateY(-20px) rotate(45deg); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="envelope" onclick="toggleEnvelope()">
+        <p>Cliquez pour ouvrir</p>
+    </div>
+    <div class="message-container">
+        <h1>Félicitations pour ta maturité !</h1>
+        <p>Et joyeux anniversaire ma vie <3</p>
+        <div class="hearts">
+            <!-- Ajout de plusieurs cœurs autour du texte -->
+            <div class="heart" style="top: 10%; left: 20%;"></div>
+            <div class="heart" style="top: 10%; left: 80%;"></div>
+            <div class="heart" style="top: 85%; left: 20%;"></div>
+            <div class="heart" style="top: 85%; left: 80%;"></div>
+        </div>
+    </div>
+    <script>
+        function toggleEnvelope() {
+            var envelope = document.querySelector('.envelope');
+            var message = document.querySelector('.message-container');
+            envelope.classList.toggle('open');
+            setTimeout(() => {
+                message.style.display = 'block';
+            }, 500);
+        }
+    </script>
+</body>
+</html>
